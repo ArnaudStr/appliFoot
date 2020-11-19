@@ -1,6 +1,6 @@
 # appliFoot
 
-Application permmetant de gérer des culbs, des joueurs sur différentes saisons de football dévéloppée sous Ssymfony 4.4 et Bootstrap 4 pour le visuel.
+Application permmetant de gérer des culbs, des joueurs sur différentes saisons de football dévéloppée sous Symfony 4.4 et Bootstrap 4 pour le visuel.
 
 Définitions du modèle de données
 

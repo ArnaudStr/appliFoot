@@ -15,7 +15,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class AppFixtures extends Fixture
 {
-
     // Pour l'encodage des mots de passe des utilisateurs générés
     private $encoder;
 
@@ -28,7 +27,6 @@ class AppFixtures extends Fixture
         $this->entityManager = $entityManager;
     }
     
-
     /* Simulons une ligue à 10 clubs sur 10 ans où chaque club a 20 joueurs et chaque joueur a 2 clubs
     *  (c'est à dire qu'on crée 10*20/2 = 100 joueurs)
     *  Chaque joueur joue les 10 saisons dans les mêmes clubs
@@ -82,17 +80,17 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         // On va à présent créer les objets saisonJoueur afin d'attribuer des clubs au joueur ainsi que leur statisque
-        // pour chaque club et chaque saisons
-        // On parcours chaque saisons
+        // pour chaque club et chaque saison
+        // On parcourt chaque saison
         for ($i=0; $i<$nbSaisons; $i++){
 
-            // On reprend le compteur des joueurs à 1, puisqu'on reprend les mêmes joueurs pour chaque saisons
+            // On reprend le compteur des joueurs à 1, puisqu'on reprend les mêmes joueurs pour chaque saison
             $indiceJoueur = 1;
 
             // On récupère la saison
             $saison = $this->entityManager->getRepository(Saison::class)->findOneBy(['anneeDebut' => $anneeDebutSaisons+$i]);
             
-            // On parcours chaque club
+            // On parcourt chaque club
             for ($j=1; $j<=$nbClubs; $j++){
                 // 1er club dans lequel on va inscrire les joueurs
                 $club1 = $this->entityManager->getRepository(Club::class)->findOneBy(['nom' => 'club '.$j]);
@@ -103,11 +101,13 @@ class AppFixtures extends Fixture
                     $club2 = $this->entityManager->getRepository(Club::class)->findOneBy(['nom' => 'club 1']);
                 else $club2 = $this->entityManager->getRepository(Club::class)->findOneBy(['nom' => 'club '.($j+1)]);
 
-                // On inscrit les joueurs dans les 2 clubs
+                // On inscrit chaque joueur dans ses 2 clubs
                 for ($k=1; $k<=$nbClubs; $k++){
                  
                     // On recupère le joueurs en fonction de son indice
                     $joueur = $this->entityManager->getRepository(Joueur::class)->findOneBy(['prenom' => $indiceJoueur]);
+                    
+                    // Inscription joueur 1er club
                     $saisonJoueur = new SaisonJoueur();
                     $saisonJoueur->setJoueur($joueur);
                     $saisonJoueur->setSaison($saison);
@@ -119,7 +119,7 @@ class AppFixtures extends Fixture
                     $saisonJoueur->setNbButs(rand(0,20));
                     $manager->persist($saisonJoueur);
 
-                    // $club2 = $this->entityManager->getRepository(Club::class)->findOneBy(['nom' => 'club '.(]);
+                    // Inscription joueur 2eme club
                     $saisonJoueur = new SaisonJoueur();
                     $saisonJoueur->setJoueur($joueur);
                     $saisonJoueur->setSaison($saison);

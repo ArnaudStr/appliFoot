@@ -17,14 +17,14 @@ Pages
 
 - Page d’accueil utilisateur non connecté : formulaire de login.
 - Page d’accueil utilisateur connecté : liste des clubs avec sélecteur de saison.
-- Page club : lors d’un clic sur un club.
+- Page club : lors d’un clic sur un club
 	- Liste des joueurs pour la saison courante.
-	- Permettre de pouvoir changer la saison courante.
-- Page d’un joueur : lors du clic sur l’un des joueurs.
+	- Possibilité de changer la saison courante.
+- Page d’un joueur : lors du clic sur l’un des joueurs
 	- Liste de ses clubs pour la saison courante, ainsi que les statistiques associées.
-	- Permettre de pouvoir changer la saison courante.
+	- Possibilité de changer la saison courante.
 
-- Les données sont remplies à l’aide des Fixtures (Clubs, Saisons, Joueurs, Statistiques, Comptes utilisateurs)
+- Les données sont remplies à l’aide des Fixtures (Clubs, Saisons, Joueurs, Statistiques, Comptes utilisateurs).
 
 
 Pour tester l'application (sous Windows, avec Composer, Wamp et git bash) : 

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<h2 style="text-align:center">Liste des joueurs de <strong>{{ club }}</strong> pour la saison <strong>{{ saison }}</strong>
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Changer de saison
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+  {% for saison in saisons %}
+    <a class="dropdown-item" href="{{ path('clubSaison', {idClub:club.id, idSaison:saison.id}) }}">{{ saison.anneeDebut }}</a>
+  {% endfor %}
+</div> 
+</h2>
+
+<!-- Tableau avec les joueurs et leur statistiques pour la saison courante -->
+<table class="table table-striped table-bordered .col-10">
+  <thead>
+    <tr>
+      <th scope="col">Joueur</th>
+      <th scope="col">Numéro de maillot</th>
+      <th scope="col">Nombre de buts inscrits</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for saisonJoueur in saisonJoueurs %}
+      <tr>
+          <td>
+            <a href="{{ path('infoJoueur', {idJoueur:saisonJoueur.joueur.id, idSaison:saison.id}) }}">
+            {{ saisonJoueur.joueur }}</a>
+          </td>
+          <td>{{ saisonJoueur.numeroMaillot }}</td> 
+          <td>{{ saisonJoueur.nbButs }}</td> 
+      </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="2">Nombre total de joueurs  : <strong>{{ saisonJoueurs|length}}</strong></td>
+      <td>Nombre total de buts inscrits dans la saison : <strong>{{ totalButs }}</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}

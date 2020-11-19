@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="signIn">
+    <form method="post" class="form-signin">
+
+        <!-- Message d'erreur en cas de nom d'utilisateur inconnu ou de mot de passe incorrect -->
+        {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <img class="mb-4" src="/assets/images/logoLogin.png" alt="logo" width="256" height="256">        
+        <h1 class="h3 mb-3 font-weight-normal text-center">Veuillez vous connecter</h1>
+        <label for="inputUsername" class="sr-only">Nom d'utilisateur</label>
+        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" placeholder="Nom d'utilisateur" class="form-control" required autofocus>
+        <label for="inputPassword" class="sr-only">Mot de passe</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+
+        <!-- Utilisation d'un token csrf pour être sûr que c'est bien l'utilisateur qui valide et non une entité tierce -->
+        <input type="hidden" name="_csrf_token"
+        value="{{ csrf_token('authenticate') }}"
+        >
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+
+    </form>
+</div>
+{% endblock %}
